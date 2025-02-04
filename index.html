@@ -257,7 +257,7 @@
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script>
         // Countdown Timer
-        const weddingDate = new Date('2025-02-23T18:00:00').getTime();
+        const weddingDate = new Date('2025-02-23T11:00:00').getTime();
         
         function updateCountdown() {
             const now = new Date().getTime();
@@ -279,7 +279,7 @@
         // Map Initialization
         const map = L.map('wedding-map').setView([10.8231, 106.6297], 15);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-        L.marker([@10.8007119,106.6171514,17z]).addTo(map)
+        L.marker([10.8007119,106.6171514,17]).addTo(map)
             .bindPopup('<b>Địa điểm tổ chức</b><br>Trung tâm tiệc cưới Kalina');
 
         // Wish Management
