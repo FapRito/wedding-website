@@ -251,7 +251,51 @@
     </div>
 
     <div class="wishes-container" id="wishesContainer"></div>
+    <script>
+        // Lấy danh sách lời chúc từ localStorage hoặc tạo mảng rỗng nếu chưa có
+        let wishes = JSON.parse(localStorage.getItem('weddingWishes')) || [];
 
+        // Hiển thị lời chúc
+        function displayWishes() {
+            const container = document.getElementById('wishesContainer');
+            container.innerHTML = wishes.map((wish, index) => `
+                <div class="wish-card">
+                    <h3>${wish.name}</h3>
+                    <p>${wish.message}</p>
+                    <small>${new Date(wish.timestamp).toLocaleString()}</small>
+                </div>
+            `).join('');
+        }
+
+        // Thêm lời chúc mới
+        function addWish(name, message) {
+            const newWish = {
+                name,
+                message,
+                timestamp: new Date().toISOString()
+            };
+            wishes.unshift(newWish); // Thêm vào đầu mảng
+            localStorage.setItem('weddingWishes', JSON.stringify(wishes)); // Lưu vào localStorage
+            displayWishes(); // Cập nhật giao diện
+        }
+
+        // Xử lý form gửi lời chúc
+        document.getElementById('wishForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = this.querySelector('input').value;
+            const message = this.querySelector('textarea').value;
+            
+            if (name && message) {
+                addWish(name, message); // Thêm lời chúc mới
+                this.reset(); // Reset form
+            } else {
+                alert("Vui lòng điền đầy đủ thông tin!");
+            }
+        });
+
+        // Hiển thị lời chúc khi trang được tải
+        displayWishes();
+    </script>
     <div id="wedding-map"></div>
 
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
